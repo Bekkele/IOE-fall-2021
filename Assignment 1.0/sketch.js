@@ -126,7 +126,8 @@ function gotData() {
   //console.log("splitter[0]" + splitter[0]); 
   buttonState = splitter[0];                 //put the first sensor's data into a variable
   potentiometer = splitter[1];
-  lightState = splitter[2]; 
+  lightState = splitter[2];
+  
 
 
 
@@ -155,12 +156,17 @@ function gotRawData(thedata) {
 function draw() {
   //       condition | true| false (Turnery)
  console.error(windowWidth, windowHeight, potentiometer);
+  
+  //SPRINT 1- Button state//
   background(255* -buttonState + 255,255* -buttonState + 255,255* -buttonState + 255);
   text(latestData, 10,10);
   ellipseMode(RADIUS);    
   fill(255,255,buttonState*255);
   noStroke(); 
   //console.log("buttonState  "  + buttonState);
+  
+  //SPRINT 2- Lightstate//
+  //SPRINT 3- Potentiometer//
   ellipse(windowWidth*Number(potentiometer)/1023,
   Math.abs(512-Number(potentiometer))/512*windowHeight, lightState, lightState);
 // ellipse( 0,windowHeight, 100,100)
