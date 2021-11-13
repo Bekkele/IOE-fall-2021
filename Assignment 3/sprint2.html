@@ -1,0 +1,60 @@
+<html>
+  <!-- 
+  Base code is by:
+
+@rev3rend
+rev3rend R. Luke DuBois
+@shiffman
+shiffman Daniel Shiffman
+@meiamsome
+meiamsome Oliver Wright
+from: https://github.com/IDMNYU/p5.js-speech -->
+
+  <!-- Bekkele Hamilton's addition
+November 11 2021.
+Added a dictionary object that stores word keys that can be displayed in French 
+if the user says the correct word in the dictionairy ("hi"), only listens once.
+-->
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+    <script src="../lib/p5.speech.js"></script>
+    <script>
+      var myRec = new p5.SpeechRec(); // new P5.SpeechRec object
+      var mySpeech = new p5.Speech();
+      let dictionary = { hi: "bonjour" };
+
+      function setup() {
+        // graphics stuff:
+        createCanvas(800, 400);
+        background(255, 255, 255);
+        fill(0, 0, 0, 255);
+        // instructions:
+        textSize(32);
+        textAlign(CENTER);
+        text("say something", width / 2, height / 2);
+        myRec.onResult = showResult;
+        myRec.start();
+      }
+
+      function draw() {
+        // why draw when you can talk?
+      }
+
+      function showResult() {
+        if (myRec.resultValue == true) {
+          background(192, 255, 192);
+          //access a variable on an object
+          text(
+            myRec.resultString + ": " + dictionary[myRec.resultString],
+            width / 2,
+            height / 2
+          );
+          mySpeech.setVoice(0);
+          mySpeech.speak(dictionary[myRec.resultString]);
+        }
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
